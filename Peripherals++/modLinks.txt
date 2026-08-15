@@ -1,0 +1,120 @@
+
+https://github.com/austinv11/PeripheralsPlusPlus
+https://www.curseforge.com/minecraft/mc-mods/peripherals
+
+mcmod.info Changed (Mod name, ModId, Description, Credits, AuthorList):
+{
+  "modListVersion": 2,
+  "modList": [{
+    "modid": "PeripheralsMinusMinus", #HERE
+    "name": "Peripherals--", #HERE
+    "description": "A patch of Peripherals++ to fix the RCE vulnerability, Thank you Recaf team for your wonderful software.", #HERE
+    "version": "@VERSION@",
+    "mcversion": "1.7.10",
+    "url": "austinv11.com",
+    "updateUrl": "",
+    "authorList": ["austinv11", "morgatron"], #HERE
+    "credits": "Made by austinv11, some ideas were taken from RichardG, Patched by morgatron", #HERE
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "",
+    "requiredMods": ["Forge","ComputerCraft"],
+    "dependencies": [],
+    "dependants": [],
+    "useDependencyInformation": false
+  }]
+}
+
+/com/austinv11/peripheralsplusplus/event/handler/RobotHandler.class Changed (All): 
+package com.austinv11.peripheralsplusplus.event.handler;
+
+import com.austinv11.peripheralsplusplus.network.RobotEventPacket;
+import com.austinv11.peripheralsplusplus.reference.Config;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class RobotHandler {
+    private Robot robot;
+    public static CopyOnWriteArrayList<RobotOperation> operationList = new CopyOnWriteArrayList();
+
+    public RobotHandler() {
+    }
+
+    @SubscribeEvent
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        this.doOperations();
+    }
+
+    private void doOperations() {
+    }
+
+    public static class MouseMoveOperation
+    extends RobotOperation {
+        public int x;
+        public int y;
+
+        @Override
+        public void onFinish(Robot robot) {
+        }
+
+        @Override
+        public void operate(Robot robot) {
+        }
+    }
+
+    public static class MouseClickOperation
+    extends RobotOperation {
+        public RobotEventPacket.PressType pressType;
+        public int button;
+
+        @Override
+        public void onFinish(Robot robot) {
+        }
+
+        @Override
+        public void operate(Robot robot) {
+        }
+    }
+
+    public static class KeyBoardOperation
+    extends RobotOperation {
+        public RobotEventPacket.PressType pressType;
+        public String key;
+
+        @Override
+        public void onFinish(Robot robot) {
+        }
+
+        @Override
+        public void operate(Robot robot) {
+        }
+
+        public Field getKeyField() {
+            return null;
+        }
+    }
+
+    public static abstract class RobotOperation {
+        private int ticker;
+        private int maxTick;
+
+        public RobotOperation() {
+        }
+
+        public boolean isFinished() {
+            return true;
+        }
+
+        public void tick(Robot robot) {
+        }
+
+        public abstract void onFinish(Robot var1);
+
+        public abstract void operate(Robot var1);
+    }
+}
